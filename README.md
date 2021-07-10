@@ -86,7 +86,7 @@ First open a new terminal and run the following command.
 watch kubectl get pods -n knativetutorial
 ```
 
-Login into the `curler` pod in a different terminal and send a Cloud Event to the Broker.
+Login into the `curler` pod in a different terminal and send a Cloud Event to the Broker and trigger addresses.
 
 ```
 kubectl -n knativetutorial exec -it curler -- /bin/bash
