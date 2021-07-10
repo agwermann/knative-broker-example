@@ -66,7 +66,7 @@ kubectl apply -n knativetutorial -f trigger-hellobonjour.yaml
 kubectl --namespace knativetutorial get triggers.eventing.knative.dev
 ```
 
-### Verification
+### Verifying triggers and broker addresses
 ```
 kubectl get trigger helloaloha -o jsonpath='{.status.subscriberUri}' -n knativetutorial
 kubectl get trigger hellobonjour -o jsonpath='{.status.subscriberUri}' -n knativetutorial
@@ -90,6 +90,15 @@ Login into the `curler` pod in a different terminal and send a Cloud Event to th
 
 ```
 kubectl -n knativetutorial exec -it curler -- /bin/bash
+
+curl -v "http://broker-ingress.knative-eventing.svc.cluster.local/knativetutorial/default" \
+-X POST \
+-H "Ce-Id: say-hello" \
+-H "Ce-Specversion: 1.0" \
+-H "Ce-Type: greeting" \
+-H "Ce-Source: mycurl" \
+-H "Content-Type: application/json" \
+-d '{"key":"from a curl"}'
 
 curl -v "http://eventingaloha.knativetutorial.svc.cluster.local" \
 -X POST \
