@@ -9,22 +9,24 @@ kind create cluster --name cloud-cluster --config cloud-cluster-config.yaml
 
 ### Installing Knative Serving Component
 ```
-kubectl apply -f https://github.com/knative/serving/releases/download/v0.23.0/serving-crds.yaml
-kubectl apply -f https://github.com/knative/serving/releases/download/v0.23.0/serving-core.yaml
+kubectl apply -f https://github.com/knative/serving/releases/download/knative-v1.8.0/serving-crds.yaml
+kubectl apply -f https://github.com/knative/serving/releases/download/knative-v1.8.0/serving-core.yaml
 kubectl get pods --namespace knative-serving
 ```
 ### Install istio
 ```
-kubectl apply -f https://github.com/knative/net-istio/releases/download/v0.23.0/istio.yaml
-kubectl apply -f https://github.com/knative/net-istio/releases/download/v0.23.0/net-istio.yaml
+kubectl apply -l knative.dev/crd-install=true -f https://github.com/knative/net-istio/releases/download/knative-v1.8.0/istio.yaml
+kubectl apply -f https://github.com/knative/net-istio/releases/download/knative-v1.8.0/istio.yaml
+kubectl apply -f https://github.com/knative/net-istio/releases/download/knative-v1.8.0/net-istio.yaml
 kubectl --namespace istio-system get service istio-ingressgateway
 kubectl get pods --namespace knative-serving
+kubectl get pods --namespace istio-system
 ```
 
 ### Installing Knative Eventing Component
 ```
-kubectl apply -f https://github.com/knative/eventing/releases/download/v0.23.0/eventing-crds.yaml
-kubectl apply -f https://github.com/knative/eventing/releases/download/v0.23.0/eventing-core.yaml
+kubectl apply -f https://github.com/knative/eventing/releases/download/knative-v1.8.0/eventing-crds.yaml
+kubectl apply -f https://github.com/knative/eventing/releases/download/knative-v1.8.0/eventing-core.yaml
 kubectl get pods --namespace knative-eventing
 ```
 
@@ -50,7 +52,7 @@ kubectl get channel -n knativetutorial
 ### Deploy Sinks
 ```
 docker pull quay.io/rhdevelopers/eventinghello:0.0.2
-kind load docker-image quay.io/rhdevelopers/eventinghello:0.0.2 --name cloud-cluster
+kind load docker-image quay.io/rhdevelopers/eventinghello:0.0.2
 kubectl apply -n knativetutorial -f eventing-aloha-sink.yaml
 kubectl apply -n knativetutorial -f eventing-bonjour-sink.yaml
 ```
