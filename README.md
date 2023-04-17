@@ -37,9 +37,9 @@ kubectl create namespace knativetutorial
 
 ### Create default broker
 ```
-kubectl apply -f https://github.com/knative/eventing/releases/download/v0.23.0/in-memory-channel.yaml
-kubectl apply --filename https://github.com/knative/eventing/releases/download/v0.23.0/eventing-sugar-controller.yaml
-kubectl apply -f https://github.com/knative/eventing/releases/download/v0.23.0/mt-channel-broker.yaml
+kubectl apply -f https://github.com/knative/eventing/releases/download/knative-v1.8.0/in-memory-channel.yaml
+kubectl apply --filename https://github.com/knative/eventing/releases/download/knative-v1.8.0/eventing-sugar-controller.yaml
+kubectl apply -f https://github.com/knative/eventing/releases/download/knative-v1.8.0/mt-channel-broker.yaml
 kubectl apply -n knativetutorial -f default-broker.yaml
 ```
 
